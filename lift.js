@@ -4,16 +4,24 @@ var maxFloor = 17;
 var minFloor = 1;
 
 function startProgram() {
-         document.getElementById("stateLift").innerHTML = "";
+    document.getElementById("currentFloor").innerHTML = currentFloor;
+    if(document.getElementById("targetFloor").value > 17 || document.getElementById("targetFloor").value < 1){
+        alert("กรุณากรอกชั้น 1-17 ค่ะ");
+    }else{
+          document.getElementById("stateLift").innerHTML = "";
          checkWiegthOverload();
+    }
+       
 
    // console.log(checkWiegthOverload())
     
 }
 
+
 function checkWiegthOverload(){
   if(document.getElementById("personWeight").value > maxWeigthLift) {
       document.getElementById("stateLift").innerHTML = "Stop";
+      alert("น้ำหนักเกิน");
   }else{ 
         checkStateLift();
 
@@ -27,7 +35,7 @@ function checkStateLift(){
     if(currentFloor < document.getElementById("targetFloor").value){
        liftUp();
     }else{
-         liftDown();
+        liftDown();
     }
 
 }
@@ -39,6 +47,7 @@ function liftUp(){
      
         }else if(currentFloor == document.getElementById("targetFloor").value){
              document.getElementById("stateLift").append(" Stop")
+             alert("ถึงแล้ว");
              break;
        
         }
@@ -54,7 +63,7 @@ function liftDown(){
         }else if(currentFloor == document.getElementById("targetFloor").value){
              document.getElementById("stateLift").append(" Stop")
              break;
-       
+            alert("ถึงแล้ว");
         }
     }
 }
