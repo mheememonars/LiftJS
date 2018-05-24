@@ -1,38 +1,44 @@
-var maxWeigthLift = 1000;
-var currentFloor = 10;
-var maxFloor = 17;
-var minFloor = 1;
+var Lift = {
+    currentFloor: 1,
+    maxWeigthLift : 1000,
+    maxFloor : 17,
+    minFloor : 1
+   
+};
+
+var personWeight;
+var targetFloor;
 
 function startProgram() {
-    document.getElementById("currentFloor").innerHTML = currentFloor;
-    if(document.getElementById("targetFloor").value > 17 || document.getElementById("targetFloor").value < 1){
+    personWeight = document.getElementById("personWeight").value;
+    targetFloor = document.getElementById("targetFloor").value;
+
+    document.getElementById("currentFloor").innerHTML = Lift.currentFloor;
+    if(targetFloor > Lift.maxFloor || targetFloor < Lift.minFloor){
         alert("กรุณากรอกชั้น 1-17 ค่ะ");
     }else{
           document.getElementById("stateLift").innerHTML = "";
          checkWiegthOverload();
     }
-       
-
-   // console.log(checkWiegthOverload())
     
 }
 
 
 function checkWiegthOverload(){
-  if(document.getElementById("personWeight").value > maxWeigthLift) {
+  if(personWeight > Lift.maxWeigthLift) {
       document.getElementById("stateLift").innerHTML = "Stop";
       alert("น้ำหนักเกิน");
   }else{ 
         checkStateLift();
 
   }
-  document.getElementById("currentFloor").innerHTML = currentFloor;
+  document.getElementById("currentFloor").innerHTML = Lift.currentFloor;
   
 }
 
 function checkStateLift(){
 
-    if(currentFloor < document.getElementById("targetFloor").value){
+    if(Lift.currentFloor < targetFloor){
        liftUp();
     }else{
         liftDown();
@@ -41,14 +47,14 @@ function checkStateLift(){
 }
 
 function liftUp(){
-    for(currentFloor; currentFloor <=  document.getElementById("targetFloor").value ; currentFloor++){
-         if(currentFloor < document.getElementById("targetFloor").value){
+    for(Lift.currentFloor; Lift.currentFloor <=  targetFloor ; Lift.currentFloor++){
+         if(Lift.currentFloor < targetFloor){
              document.getElementById("stateLift").append(" Up")
      
-        }else if(currentFloor == document.getElementById("targetFloor").value){
+        }else if(Lift.currentFloor == targetFloor){
              document.getElementById("stateLift").append(" Stop")
-             alert("ถึงแล้ว");
              break;
+             alert("ถึงแล้ว");
        
         }
     }
@@ -56,14 +62,15 @@ function liftUp(){
 
 
 function liftDown(){
-    for(currentFloor; currentFloor >=  document.getElementById("targetFloor").value ; currentFloor--){
-         if(currentFloor > document.getElementById("targetFloor").value){
+    for(Lift.currentFloor; Lift.currentFloor >=  targetFloor ; Lift.currentFloor--){
+         if(Lift.currentFloor > targetFloor){
              document.getElementById("stateLift").append(" Down")
      
-        }else if(currentFloor == document.getElementById("targetFloor").value){
+        }else if(Lift.currentFloor == targetFloor){
              document.getElementById("stateLift").append(" Stop")
              break;
-            alert("ถึงแล้ว");
+             alert("ถึงแล้ว");
+          
         }
     }
 }
