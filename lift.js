@@ -8,6 +8,7 @@ var Lift = {
 
 var personWeight;
 var targetFloor;
+var arrayStateLift;
 
 function startProgram() {
     personWeight = document.getElementById("personWeight").value;
@@ -18,59 +19,66 @@ function startProgram() {
         alert("กรุณากรอกชั้น 1-17 ค่ะ");
     }else{
           document.getElementById("stateLift").innerHTML = "";
-         checkWiegthOverload();
+         isWeigth = checkWiegthOverload(personWeight);
+         if(isWeigth == "น้ำหนักเกิน"){
+             document.getElementById("stateLift").append(" Stop")
+         }
+         document.getElementById("currentFloor").innerHTML = Lift.currentFloor;
     }
     
 }
 
-
-function checkWiegthOverload(){
+function checkWiegthOverload(personWeight){
   if(personWeight > Lift.maxWeigthLift) {
-      document.getElementById("stateLift").innerHTML = "Stop";
-      alert("น้ำหนักเกิน");
+      return "น้ำหนักเกิน";
   }else{ 
-        checkStateLift();
+        checkStateLift(targetFloor);
+        return "น้ำหนักไม่เกิน";
 
   }
-  document.getElementById("currentFloor").innerHTML = Lift.currentFloor;
   
 }
 
-function checkStateLift(){
-
+function checkStateLift(targetFloor){
     if(Lift.currentFloor < targetFloor){
        liftUp();
-    }else{
+       return "Up";
+    }else if (Lift.currentFloor > targetFloor){
         liftDown();
+        return "Down";
+    }else {
+        liftStop();
+        return "Stop";
     }
-
 }
 
 function liftUp(){
     for(Lift.currentFloor; Lift.currentFloor <=  targetFloor ; Lift.currentFloor++){
          if(Lift.currentFloor < targetFloor){
              document.getElementById("stateLift").append(" Up")
-     
         }else if(Lift.currentFloor == targetFloor){
-             document.getElementById("stateLift").append(" Stop")
+             document.getElementById("stateLift").append("Stop")
              break;
-             alert("ถึงแล้ว");
        
         }
     }
-}
 
+}
 
 function liftDown(){
     for(Lift.currentFloor; Lift.currentFloor >=  targetFloor ; Lift.currentFloor--){
          if(Lift.currentFloor > targetFloor){
-             document.getElementById("stateLift").append(" Down")
-     
+             document.getElementById("stateLift").append("Down")
         }else if(Lift.currentFloor == targetFloor){
-             document.getElementById("stateLift").append(" Stop")
+             document.getElementById("stateLift").append("Stop")
              break;
              alert("ถึงแล้ว");
-          
         }
     }
+}
+
+function liftStop(){
+  if(Lift.currentFloor == targetFloor){
+             document.getElementById("stateLift").append("Stop")
+  }
 }
