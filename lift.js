@@ -1,3 +1,14 @@
+var maxWeigthLift = 1000;
+
+
 function startProgram() {
-    console.log("hello world")
+    checkWiegthOverload();
+   // console.log(checkWiegthOverload())
+    
+}
+
+function checkWiegthOverload(){
+  if(document.getElementById("personWeight").value > maxWeigthLift) {
+      document.getElementById("stateLift").innerHTML = "Stop";
+  }
 }
