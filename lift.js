@@ -4,7 +4,9 @@ var maxFloor = 17;
 var minFloor = 1;
 
 function startProgram() {
+         document.getElementById("stateLift").innerHTML = "";
          checkWiegthOverload();
+
    // console.log(checkWiegthOverload())
     
 }
@@ -23,29 +25,32 @@ function checkWiegthOverload(){
 function checkStateLift(){
 
     if(currentFloor < document.getElementById("targetFloor").value){
-
-
        liftUp();
-
-
-    }else if(currentFloor == document.getElementById("targetFloor").value){
-        document.getElementById("stateLift").innerHTML = "Stop";
     }else{
-          document.getElementById("stateLift").innerHTML = "Down";
+         liftDown();
     }
 
-
-      
 }
 
 function liftUp(){
     for(currentFloor; currentFloor <=  document.getElementById("targetFloor").value ; currentFloor++){
          if(currentFloor < document.getElementById("targetFloor").value){
-
              document.getElementById("stateLift").append(" Up")
-      
+     
+        }else if(currentFloor == document.getElementById("targetFloor").value){
+             document.getElementById("stateLift").append(" Stop")
+             break;
+       
+        }
+    }
+}
 
 
+function liftDown(){
+    for(currentFloor; currentFloor >=  document.getElementById("targetFloor").value ; currentFloor--){
+         if(currentFloor > document.getElementById("targetFloor").value){
+             document.getElementById("stateLift").append(" Down")
+     
         }else if(currentFloor == document.getElementById("targetFloor").value){
              document.getElementById("stateLift").append(" Stop")
              break;
